@@ -1,9 +1,10 @@
 const vscode = require('vscode')
 const fs = require('fs')
+var listOfRandomNumbers = []
 
 function activate(context) {
   let disposable = vscode.commands.registerCommand(
-    'test-id-generator.addTestDataAttributes',
+    'data-test-id-generator.addTestDataAttributes',
     () => {
       addTestDataAttributes()
     }
@@ -13,7 +14,7 @@ function activate(context) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      'test-id-generator.addTestDataAttributesKeybinding',
+      'data-test-id-generator.addTestDataAttributesKeybinding',
       () => {
         addTestDataAttributes()
       }
@@ -28,12 +29,13 @@ function addTestDataAttributes() {
     const text = document.getText()
 
     const extensionPath = vscode.extensions.getExtension(
-      'omeerdvrn.test-id-generator'
+      'hanigerges.data-test-id-generator'
     ).extensionPath
 
     // Get the user-configured configPath or use the default value
-    const configPath =
-      vscode.workspace.workspaceFolders[0].uri.fsPath.concat('/.testidrc.json')
+    const configPath = vscode.workspace.workspaceFolders[0].uri.fsPath.concat(
+      '/.datatestidrc.json'
+    )
 
     console.log('Extension Path:', extensionPath)
     console.log('Config Path:', configPath)
@@ -54,10 +56,16 @@ function addTestDataAttributes() {
             return match
           }
 
+          var randomNumber = Math.floor(Math.random() * 10000) + 1
+          listOfRandomNumbers.push(randomNumber)
+
+          while (listOfRandomNumbers.includes(randomNumber)) {
+            randomNumber = Math.floor(Math.random() * 100000) + 1
+          }
           const existingAttributes = attributes.trim()
           const testId = existingAttributes.includes('id=')
             ? getIdFromElement(existingAttributes)
-            : elementName + '-' + config.defaultTestId
+            : elementName + '-' + config.defaultTestId + '-' + randomNumber
 
           console.log('Existing Attributes:', existingAttributes)
           console.log('Test ID:', testId)
@@ -78,7 +86,7 @@ function addTestDataAttributes() {
       })
     } else {
       vscode.window.showErrorMessage(
-        'Config or ignoreElements file not found. Create ".testidrc.json" file in your extension project.'
+        'Config or ignoreElements file not found. Create ".datatestidrc.json" file in your extension project.'
       )
     }
   } else {

@@ -1,11 +1,12 @@
 {
   "name": "test-id-generator",
   "displayName": "Test ID Generator",
-  "publisher": "omeerdvrn",
-  "icon": "assets/icon.png",
+  "publisher": "hanigerges",
+  "icon": "assets/coffee.jpg",
   "repository": {
     "type": "git",
-    "url": "https://github.com/omeerdvrn/vscode-test-id-generator"},
+    "url": "https://github.com/HaniGerges/vscode-data-test-id-generator"
+  },
   "description": "It is an extension to generate test ID's.",
   "version": "1.1.3",
   "engines": {
@@ -15,19 +16,19 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:test-id-generator.addTestDataAttributesKeybinding"
+    "onCommand:data-test-id-generator.addTestDataAttributesKeybinding"
   ],
   "main": "src/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "test-id-generator.addTestDataAttributesKeybinding",
+        "command": "data-test-id-generator.addTestDataAttributesKeybinding",
         "title": "Add Test IDs"
       }
     ],
     "keybindings": [
       {
-        "command": "test-id-generator.addTestDataAttributesKeybinding",
+        "command": "data-test-id-generator.addTestDataAttributesKeybinding",
         "key": "shift+alt+t",
         "mac": "cmd+shift+t",
         "when": "editorTextFocus"
